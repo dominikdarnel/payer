@@ -1,6 +1,8 @@
-Factory.define :user do |user|
-  user.name                   Faker::Name.unique.name
-  user.email                  Faker::Email.unique.email
-  user.password               '10203040'
-  user.password_confirmation  '10203040'
+FactoryBot.define do
+  factory :user do
+    name { Faker::Name.unique.name }
+    email { Faker::Internet.unique.email }
+    password { '10203040' }
+    password_confirmation { '10203040' }
+  end
 end
