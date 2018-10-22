@@ -10,10 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_071008) do
+ActiveRecord::Schema.define(version: 2018_10_22_090517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "currency"
+    t.integer "amount"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "bank"
+    t.string "name"
+    t.bigint "number"
+    t.integer "month"
+    t.integer "year"
+    t.integer "ccv"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_cards_on_account_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "amount"
+    t.bigint "initiated_by_id"
+    t.bigint "from_account_id"
+    t.bigint "to_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_account_id"], name: "index_transactions_on_from_account_id"
+    t.index ["initiated_by_id"], name: "index_transactions_on_initiated_by_id"
+    t.index ["to_account_id"], name: "index_transactions_on_to_account_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -33,4 +67,9 @@ ActiveRecord::Schema.define(version: 2018_10_22_071008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "users"
+  add_foreign_key "cards", "accounts"
+  add_foreign_key "transactions", "accounts", column: "from_account_id"
+  add_foreign_key "transactions", "accounts", column: "to_account_id"
+  add_foreign_key "transactions", "users", column: "initiated_by_id"
 end
