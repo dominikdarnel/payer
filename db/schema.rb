@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
+    t.string "name"
     t.string "currency"
     t.integer "amount"
     t.bigint "user_id"
