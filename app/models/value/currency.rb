@@ -16,5 +16,17 @@ module Value
     def self.all
       Constants::CURRENCIES
     end
+
+    def self.codes
+      Constants::CURRENCIES.map do |currency|
+        currency.last[:code]
+      end
+    end
+
+    def self.texts
+      Constants::CURRENCIES.map do |currency|
+        currency.last[:text]
+      end
+    end
   end
 end
