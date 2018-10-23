@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    @account = Account.new
+    @account = Presenters::Account.new(Account.new)
   end
 
   # GET /accounts/1/edit

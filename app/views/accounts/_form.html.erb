@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :currency %>
-    <%= form.text_field :currency %>
+    <%= form.select :currency, options_for_select(@account.currencies_for_select, @account.selected_currency) %>
   </div>
 
   <div class="actions">
