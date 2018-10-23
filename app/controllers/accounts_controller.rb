@@ -24,10 +24,10 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
-
+    @account_service = Services::AccountModifier.new(Account.new, account_params, current_user)
+    @account = @account_service.account
     respond_to do |format|
-      if @account.save
+      if @account_service.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
@@ -40,8 +40,10 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
+    @account_service = Services::AccountModifier.new(@account, account_params, current_user)
+    @account = @account_service.account
     respond_to do |format|
-      if @account.update(account_params)
+      if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
@@ -69,6 +71,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:currency, :amount, :user_id)
+      params.require(:account).permit(:name, :currency, :amount, :user_id)
     end
 end
