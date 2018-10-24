@@ -29,7 +29,7 @@ describe Account, type: :model do
 
     context '#currency' do
       it { should validate_presence_of(:currency) }
-      it { should allow_values(Value::Currency.codes).for(:currency) }
+      it { should allow_values(Value::Currency.codes.sample).for(:currency) }
       it { should_not allow_values('foo', '', nil).for(:currency) }
     end
   end

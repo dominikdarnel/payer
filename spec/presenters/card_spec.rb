@@ -35,4 +35,10 @@ describe Presenters::Card do
       it { expect(subject.selected_year).to eq 18 }
     end
   end
+
+  describe '#number_display' do
+    let(:card) { build(:card, number: 6352948857341533) }
+    let(:result) { 'XXXX-XXXX-XXXX-1533' }
+    it { expect(subject.number_display).to eq result }
+  end
 end

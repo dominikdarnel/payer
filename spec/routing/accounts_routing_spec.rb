@@ -10,10 +10,6 @@ RSpec.describe AccountsController, type: :routing do
       expect(:get => "/accounts/new").to route_to("accounts#new")
     end
 
-    it "routes to #show" do
-      expect(:get => "/accounts/1").to route_to("accounts#show", :id => "1")
-    end
-
     it "routes to #edit" do
       expect(:get => "/accounts/1/edit").to route_to("accounts#edit", :id => "1")
     end

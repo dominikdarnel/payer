@@ -15,7 +15,7 @@ describe Card, type: :model do
     it 'valid with right attributes' do
       subject.bank = 'My little account'
       subject.currency = Value::Currency.new.code
-      subject.number = 1246376528472635
+      subject.number = 1652417783524377
       subject.month = 2
       subject.year = 19
       subject.ccv = 123
@@ -35,7 +35,7 @@ describe Card, type: :model do
 
     context '#year' do
       it { should validate_presence_of(:year) }
-      it { should validate_inclusion_of(:month).in_range(18..27) }
+      it { should validate_inclusion_of(:year).in_range(18..27) }
     end
 
     context '#number' do
@@ -56,7 +56,7 @@ describe Card, type: :model do
 
     context '#currency' do
       it { should validate_presence_of(:currency) }
-      it { should allow_values(Value::Currency.codes).for(:currency) }
+      it { should allow_values(Value::Currency.codes.sample).for(:currency) }
       it { should_not allow_values('foo', '', nil).for(:currency) }
     end
   end
