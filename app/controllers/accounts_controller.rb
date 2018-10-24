@@ -9,6 +9,9 @@ class AccountsController < ApplicationController
 
   def new
     @account = Presenters::Account.new(Account.new)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit

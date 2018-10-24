@@ -1,0 +1,41 @@
+<div class="modal fade" id="new-account-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= form_with(model: @account, local: true) do |form| %>
+        <div class="modal-header">
+          <h5 class="modal-title">New Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <% if @account.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+              <ul>
+              <% @account.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :currency %>
+            <%= form.select :currency, options_for_select(@account.currencies_for_select, @account.selected_currency) %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= form.submit 'Create Account', class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

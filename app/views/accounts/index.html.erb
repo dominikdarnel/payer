@@ -1,28 +1,35 @@
 <h1>Accounts</h1>
-<br>
-<div class="row">
-  <% @accounts.each do |account| %>
-    <div class="col-3">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">
-          <%= account.currency %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= account.name %></h5>
-          <h2 class="card-text">
-            <%= account.amount %>
-            <%= account.displayed_currency %>
-          </h2>
-          <%= link_to 'Rename', edit_account_path(account), remote: true, class: 'btn btn-success btn-sm' %>
-          <% if account.amount.zero? %>
-            <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
+<% if @accounts.empty? %>
+  <div class="alert alert-primary" role="alert">
+    You don't have any accounts. Click the button below to create one.
+  </div>
+<% else %>
+  <br>
+  <div class="row">
+    <% @accounts.each do |account| %>
+      <div class="col-3">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header">
+            <%= account.currency %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= account.name %></h5>
+            <h2 class="card-text">
+              <%= account.amount %>
+              <%= account.displayed_currency %>
+            </h2>
+            <%= link_to 'Rename', edit_account_path(account), remote: true, class: 'btn btn-success btn-sm' %>
+            <% if account.amount.zero? %>
+              <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   <% end %>
-</div>
+<% end %>
+
 
 <div id="account-modal"></div>
 
-<%= link_to 'New Account', new_account_path, class: 'btn btn-primary' %>
+<%= link_to 'New Account', new_account_path, remote: true, class: 'btn btn-primary' %>
