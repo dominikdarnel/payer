@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Presenters::Card(Card.new)
+    @card = Presenters::Card.new(Card.new)
   end
 
   def create

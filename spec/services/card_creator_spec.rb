@@ -15,7 +15,6 @@ describe Services::CardCreator do
     let(:params) do
       {
         name: 'My test card',
-        currency: Value::Currency.new.code,
         number: 1234123412341234,
         month: 12,
         year: 21,
@@ -30,7 +29,6 @@ describe Services::CardCreator do
     it 'has the right attributes' do
       subject.save
       expect(subject.card.name).to eq params[:name]
-      expect(subject.card.currency).to eq params[:currency]
       expect(subject.card.bank).to be_a_kind_of(String)
       expect(subject.card.number).to eq params[:number]
       expect(subject.card.month).to eq params[:month]
@@ -38,6 +36,7 @@ describe Services::CardCreator do
       expect(subject.card.ccv).to eq params[:ccv]
       expect(subject.card.user).to eq user
       expect(subject.card.amount).to be_a_kind_of(Integer)
+      expect(%w[USD EUR HUF]).to include(subject.card.currency)
     end
   end
 end

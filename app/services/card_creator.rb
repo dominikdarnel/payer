@@ -21,20 +21,28 @@ module Services
 
     def create_card!
       @card.tap do |card|
-        card.bank = Faker::Bank.name
+        card.bank = fetch_bank
         card.name = @params[:name]
-        card.currency = @params[:currency]
+        card.currency = fetch_currency
         card.number = @params[:number]
         card.month = @params[:month]
         card.year = @params[:year]
         card.ccv = @params[:ccv]
-        card.amount = generate_money
+        card.amount = fetch_amount
         card.user_id = @current_user.id
       end
     end
 
-    def generate_money
-      case @params[:currency]
+    def fetch_bank
+      Faker::Bank.name
+    end
+
+    def fetch_currency
+      @currency ||= Value::Currency.codes.sample
+    end
+
+    def fetch_amount
+      case fetch_currency
       when Constants::CURRENCIES[:usd][:code]
         Random.rand(100..1000)
       when Constants::CURRENCIES[:eur][:code]
