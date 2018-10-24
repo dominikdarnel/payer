@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= account.name %></h5>
-          <h2 class="card-text"><%= account.amount %></h2>
+          <h2 class="card-text"><%= account.amount %><%= account.displayed_currency %></h2>
           <% if account.amount.zero? %>
             <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
           <% end %>

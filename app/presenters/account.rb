@@ -11,5 +11,16 @@ module Presenters
     def selected_currency
       currency || Value::Currency.new.code
     end
+
+    def displayed_currency
+      case currency
+      when Constants::CURRENCIES[:usd][:code]
+        '$'
+      when Constants::CURRENCIES[:eur][:code]
+        '€'
+      when Constants::CURRENCIES[:huf][:code]
+        'HUF'
+      end
+    end
   end
 end

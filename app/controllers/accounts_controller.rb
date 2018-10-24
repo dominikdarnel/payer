@@ -2,7 +2,9 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:edit, :update, :destroy]
 
   def index
-    @accounts = Account.all
+    @accounts = Account.all.map do |account|
+      Presenters::Account.new(account)
+    end
   end
 
   def new
