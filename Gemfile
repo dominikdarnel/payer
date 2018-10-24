@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'simplecov', require: false, group: :test
 gem 'bootstrap_form'
+gem 'cancancan', '~> 2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
