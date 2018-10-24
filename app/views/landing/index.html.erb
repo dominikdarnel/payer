@@ -18,17 +18,9 @@
               <%= account.amount %>
               <%= account.displayed_currency %>
             </h2>
-            <%= link_to 'Rename', edit_account_path(account), remote: true, class: 'btn btn-success btn-sm' %>
-            <% if account.amount.zero? %>
-              <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            <% end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% end %>
-
-<div id="account-modal"></div>
-
-<%= link_to 'New Account', new_account_path, remote: true, class: 'btn btn-primary' %>
