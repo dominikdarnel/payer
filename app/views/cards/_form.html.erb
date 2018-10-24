@@ -1,4 +1,4 @@
-<%= bootstrap_formfor(card) do |form| %>
+<%= bootstrap_form_for(card) do |form| %>
   <% if card.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
@@ -11,7 +11,10 @@
     </div>
   <% end %>
 
-  <%= form.submit %>
+  <%= form.number_field :number %>
+  <%= form.number_field :month %>
+  <%= form.number_field :year %>
+  <%= form.number_field :ccv %>
 
   <div class="actions">
     <%= form.submit %>

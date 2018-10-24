@@ -14,7 +14,6 @@ describe Services::CardCreator do
     let(:user) { create(:user) }
     let(:params) do
       {
-        name: 'My test card',
         number: 1234123412341234,
         month: 12,
         year: 21,
@@ -28,7 +27,6 @@ describe Services::CardCreator do
 
     it 'has the right attributes' do
       subject.save
-      expect(subject.card.name).to eq params[:name]
       expect(subject.card.bank).to be_a_kind_of(String)
       expect(subject.card.number).to eq params[:number]
       expect(subject.card.month).to eq params[:month]

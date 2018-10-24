@@ -1,3 +1,5 @@
+require 'faker'
+
 module Services
   class CardCreator
     attr_reader :card
@@ -22,7 +24,6 @@ module Services
     def create_card!
       @card.tap do |card|
         card.bank = fetch_bank
-        card.name = @params[:name]
         card.currency = fetch_currency
         card.number = @params[:number]
         card.month = @params[:month]

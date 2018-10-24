@@ -10,12 +10,12 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card_service = Services::CardCreator(Card.new, card_params, current_user)
+    @card_service = Services::CardCreator.new(Card.new, card_params, current_user)
     @card = @card_service.card
     respond_to do |format|
       if @card_service.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render :show, status: :created, location: @card }
+        format.html { redirect_to cards_path, notice: 'Card was successfully created.' }
+        format.json { render :index, status: :created, location: @card }
       else
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
@@ -38,6 +38,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:bank, :name, :number, :month, :year, :ccv)
+    params.require(:card).permit(:number, :month, :year, :ccv)
   end
 end

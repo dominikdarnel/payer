@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
 
   create_table "cards", force: :cascade do |t|
     t.string "bank"
-    t.string "name"
     t.string "currency"
     t.bigint "number"
     t.integer "month"
