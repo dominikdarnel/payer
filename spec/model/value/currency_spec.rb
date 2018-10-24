@@ -29,4 +29,10 @@ describe Value::Currency do
       expect(subject.codes).to eq %w[HUF USD EUR]
     end
   end
+
+  describe '#texts' do
+    it 'should return currency texts' do
+      expect(subject.texts).to eq ['Hungarian Forint', 'US Dollar', 'Euro']
+    end
+  end
 end
