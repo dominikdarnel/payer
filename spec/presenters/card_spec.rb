@@ -6,7 +6,7 @@ describe Presenters::Card do
 
   describe '#months_for_select' do
     let(:allowed_months) { (1..12).to_a }
-    it { expect(subject.months_for_select).to contain_exactly(allowed_months) }
+    it { expect(subject.months_for_select).to match_array(allowed_months) }
   end
 
   describe '#selected_month' do
@@ -16,13 +16,13 @@ describe Presenters::Card do
 
     context 'default value for new card' do
       let(:card) { build(:card, month: nil) }
-      it { expect(subject(card).selected_currency).to eq 1 }
+      it { expect(subject.selected_month).to eq 1 }
     end
   end
 
   describe '#years_for_select' do
     let(:allowed_years) { (18..27).to_a }
-    it { expect(subject.years_for_select).to contain_exactly(allowed_years) }
+    it { expect(subject.years_for_select).to match_array(allowed_years) }
   end
 
   describe '#selected_year' do
@@ -31,8 +31,8 @@ describe Presenters::Card do
     end
 
     context 'default value for new card' do
-      let(:card) { build(:card, month: nil) }
-      it { expect(subject(card).selected_year).to eq 18 }
+      let(:card) { build(:card, year: nil) }
+      it { expect(subject.selected_year).to eq 18 }
     end
   end
 end
