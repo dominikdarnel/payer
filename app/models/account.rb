@@ -1,6 +1,5 @@
 class Account < ApplicationRecord
   belongs_to :user
-  has_many :cards
 
   validates :user, presence: true
   validates :name, presence: true

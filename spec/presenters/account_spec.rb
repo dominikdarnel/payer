@@ -24,7 +24,7 @@ describe Presenters::Account do
     end
   end
 
-  describe 'displayed_currency' do
+  describe '#displayed_currency' do
     context 'USD' do
       let(:usd_account) do
         build(:account, currency: Constants::CURRENCIES[:usd][:code])

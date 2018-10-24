@@ -28,14 +28,16 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
   create_table "cards", force: :cascade do |t|
     t.string "bank"
     t.string "name"
+    t.string "currency"
     t.bigint "number"
     t.integer "month"
     t.integer "year"
     t.integer "ccv"
-    t.bigint "account_id"
+    t.integer "amount"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_cards_on_account_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -69,7 +71,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
   end
 
   add_foreign_key "accounts", "users"
-  add_foreign_key "cards", "accounts"
+  add_foreign_key "cards", "users"
   add_foreign_key "transactions", "accounts", column: "from_account_id"
   add_foreign_key "transactions", "accounts", column: "to_account_id"
   add_foreign_key "transactions", "users", column: "initiated_by_id"

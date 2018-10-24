@@ -1,10 +1,11 @@
 FactoryBot.define do
   factory :card do
-    bank { "MyString" }
-    name { "MyString" }
-    number { 1 }
-    month { 1 }
-    year { 1 }
-    ccv { 1 }
+    bank { Faker::Bank.name }
+    name { 'My Little Bank Card' }
+    currency { Value::Currency.new.code }
+    number { Faker::Bank.account_number(17) }
+    month { 9 }
+    year { 21 }
+    ccv { 657 }
   end
 end
