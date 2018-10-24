@@ -1,32 +1,30 @@
- <h1>Cards</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Bank</th>
-      <th>Name</th>
-      <th>Number</th>
-      <th>Month</th>
-      <th>Year</th>
-      <th>Ccv</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<h1>My Cards</h1>
+<% if @cards.empty? %>
+  <div class="alert alert-primary" role="alert">
+    You don't have any cards yet. Click the button below to create one.
+  </div>
+<% else %>
+  <br>
+  <div class="row">
     <% @cards.each do |card| %>
-      <tr>
-        <td><%= card.bank %></td>
-        <td><%= card.number %></td>
-        <td><%= card.month %></td>
-        <td><%= card.year %></td>
-        <td><%= card.ccv %></td>
-        <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="col-3">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header">
+            <%= card.bank %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= card.number %></h5>
+            <h2 class="card-text">
+              <%= card.amount %>
+            </h2>
+            <%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
-<br>
+<div id="card-modal"></div>
 
-<%= link_to 'New Card', new_card_path %>
+<%= link_to 'New Card', new_card_path, remote: true, class: 'btn btn-primary btn-lg' %>

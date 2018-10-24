@@ -1,0 +1,37 @@
+<div class="modal fade" id="new-card-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= bootstrap_form_for(@card) do |form| %>
+        <div class="modal-header">
+          <h5 class="modal-title">New Card</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <% if @card.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@card.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+              <ul>
+              <% @card.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form.number_field :number %>
+          <%= form.select :month, options_for_select(@card.months_for_select, @card.selected_month) %>
+          <%= form.select :year, options_for_select(@card.years_for_select, @card.selected_year) %>
+          <%= form.number_field :ccv %>
+
+        </div>
+        <div class="modal-footer">
+          <%= form.submit 'Create Card', class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

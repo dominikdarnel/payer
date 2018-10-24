@@ -7,6 +7,9 @@ class CardsController < ApplicationController
 
   def new
     @card = Presenters::Card.new(Card.new)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
