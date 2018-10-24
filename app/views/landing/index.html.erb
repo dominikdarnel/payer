@@ -1,49 +1,56 @@
-<h1>My Accounts</h1>
-<% if @accounts.empty? %>
-  <div class="alert alert-primary" role="alert">
-    You don't have any accounts yet. You can create a new one in the account tab.
-  </div>
-<% else %>
-  <br>
-  <div class="row">
-    <% @accounts.each do |account| %>
-      <div class="col-3">
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">
-            <%= account.currency %>
+<div class="row">
+  <div class="col-5">
+    <h1>My Accounts</h1>
+    <% if @accounts.empty? %>
+      <div class="alert alert-primary" role="alert">
+        You don't have any accounts yet. You can create a new one in the account tab.
+      </div>
+    <% else %>
+      <br>
+      <div class="row">
+        <% @accounts.each do |account| %>
+          <div class="col-6">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+              <div class="card-header">
+                <%= account.currency %>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= account.name %></h5>
+                <h2 class="card-text">
+                  <%= account.amount %>
+                  <%= account.displayed_currency %>
+                </h2>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= account.name %></h5>
-            <h2 class="card-text">
-              <%= account.amount %>
-              <%= account.displayed_currency %>
-            </h2>
+        <% end %>
+      </div>
+    <% end %>
+    <br>
+    <h1>My Cards</h1>
+    <% if @cards.empty? %>
+      <div class="alert alert-primary" role="alert">
+        You don't have any cards yet. Click the button below to create one.
+      </div>
+    <% else %>
+      <br>
+      <div class="row">
+        <% @cards.each do |card| %>
+          <div class="col-6">
+            <div class="card border-primary mb-3" style="max-width: 18rem;">
+              <div class="card-header">
+                <%= card.bank %>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= card.number_display %></h5>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
-<% end %>
-<br>
-<h1>My Cards</h1>
-<% if @cards.empty? %>
-  <div class="alert alert-primary" role="alert">
-    You don't have any cards yet. Click the button below to create one.
+  <div class="col-7">
+    <h1>My Transactions</h1>
   </div>
-<% else %>
-  <br>
-  <div class="row">
-    <% @cards.each do |card| %>
-      <div class="col-4">
-        <div class="card border-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">
-            <%= card.bank %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= card.number_display %></h5>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+</div>
