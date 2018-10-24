@@ -2,7 +2,9 @@ class CardsController < ApplicationController
   before_action :set_card, only: :destroy
 
   def index
-    @cards = Card.all
+    @cards = Card.all.map do |card|
+      Presenters::Card.new(card)
+    end
   end
 
   def new

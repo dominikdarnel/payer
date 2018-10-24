@@ -17,5 +17,10 @@ module Presenters
     def selected_year
       year || Constants::VALID_YEARS.first
     end
+
+    def number_display
+      last_four_digit = number.to_s.last(4)
+      "XXXX-XXXX-XXXX-#{last_four_digit}"
+    end
   end
 end

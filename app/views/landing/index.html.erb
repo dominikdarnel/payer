@@ -24,3 +24,26 @@
     <% end %>
   </div>
 <% end %>
+<br>
+<h1>My Cards</h1>
+<% if @cards.empty? %>
+  <div class="alert alert-primary" role="alert">
+    You don't have any cards yet. Click the button below to create one.
+  </div>
+<% else %>
+  <br>
+  <div class="row">
+    <% @cards.each do |card| %>
+      <div class="col-4">
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header">
+            <%= card.bank %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= card.number_display %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
