@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:edit, :update, :destroy]
+  before_action :set_account, only: [:update, :destroy]
 
   def index
     @accounts = Account.all.map do |account|
@@ -11,8 +11,11 @@ class AccountsController < ApplicationController
     @account = Presenters::Account.new(Account.new)
   end
 
-  # GET /accounts/1/edit
   def edit
+    @account = Presenters::Account.new(Account.find(params[:id]))
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create

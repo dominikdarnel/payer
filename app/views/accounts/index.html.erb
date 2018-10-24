@@ -6,18 +6,23 @@
       <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
         <div class="card-header">
           <%= account.currency %>
-          <%= link_to 'Rename', edit_account_path(account), class: 'btn btn-link' %>
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= account.name %></h5>
-          <h2 class="card-text"><%= account.amount %><%= account.displayed_currency %></h2>
+          <h2 class="card-text">
+            <%= account.amount %>
+            <%= account.displayed_currency %>
+          </h2>
+          <%= link_to 'Rename', edit_account_path(account), remote: true, class: 'btn btn-success btn-sm' %>
           <% if account.amount.zero? %>
-            <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
           <% end %>
         </div>
       </div>
     </div>
   <% end %>
 </div>
+
+<div id="account-modal"></div>
 
 <%= link_to 'New Account', new_account_path, class: 'btn btn-primary' %>
