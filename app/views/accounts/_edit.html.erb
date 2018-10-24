@@ -1,7 +1,7 @@
 <div class="modal fade" id="rename-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= form_with(model: @account, local: true) do |form| %>
+      <%= bootstrap_form_for(@account) do |form| %>
         <div class="modal-header">
           <h5 class="modal-title">Renaming account</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -21,10 +21,8 @@
             </div>
           <% end %>
 
-          <div class="field">
-            <%= form.label :name %>
-            <%= form.text_field :name %>
-          </div>
+          <%= form.text_field :name %>
+          
         </div>
         <div class="modal-footer">
           <%= form.submit 'Rename Account', class: 'btn btn-primary' %>
