@@ -1,26 +1,38 @@
 require 'rails_helper'
 
 describe Presenters::Card do
-  subject { described_class.new(build(:card)) }
-  describe '#currencies_for_select' do
-    let(:result) do
-      [
-        ['Hungarian Forint', 'HUF'],
-        ['US Dollar', 'USD'],
-        ['Euro', 'EUR']
-      ]
-    end
-    it { expect(subject.currencies_for_select).to eq result }
+  let(:card) { build(:card) }
+  subject { described_class.new(card) }
+
+  describe '#months_for_select' do
+    let(:allowed_months) { (1..12).to_a }
+    it { expect(subject.months_for_select).to contain_exactly(allowed_months) }
   end
 
-  describe '#selected_currency' do
-    context 'account has currency' do
-      it { expect(subject.selected_currency).to eq 'USD' }
+  describe '#selected_month' do
+    context 'account has month' do
+      it { expect(subject.selected_month).to eq card.month }
     end
 
-    context 'default value for new accounts' do
-      let(:new_card) { build(:account, currency: nil) }
-      it { expect(described_class.new(new_card).selected_currency).to eq 'USD' }
+    context 'default value for new card' do
+      let(:card) { build(:card, month: nil) }
+      it { expect(subject(card).selected_currency).to eq 1 }
+    end
+  end
+
+  describe '#years_for_select' do
+    let(:allowed_years) { (18..27).to_a }
+    it { expect(subject.years_for_select).to contain_exactly(allowed_years) }
+  end
+
+  describe '#selected_year' do
+    context 'account has year' do
+      it { expect(subject.selected_year).to eq card.year }
+    end
+
+    context 'default value for new card' do
+      let(:card) { build(:card, month: nil) }
+      it { expect(subject(card).selected_year).to eq 18 }
     end
   end
 end

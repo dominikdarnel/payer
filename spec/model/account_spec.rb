@@ -8,7 +8,6 @@ describe Account, type: :model do
   end
 
   describe 'Associations' do
-    it { should have_many(:cards) }
     it { should belong_to(:user) }
   end
 
@@ -20,32 +19,18 @@ describe Account, type: :model do
       expect(subject).to be_valid
     end
 
-    it 'not valid without a name' do
-      subject.name = nil
-      subject.currency = Value::Currency.new.code
-      subject.user = build(:user)
-      expect(subject).not_to be_valid
+    context '#name' do
+      it { should validate_presence_of(:name) }
     end
 
-    it 'not valid without a currency' do
-      subject.name = 'My little account'
-      subject.currency = nil
-      subject.user = build(:user)
-      expect(subject).not_to be_valid
+    context '#user' do
+      it { should validate_presence_of(:user) }
     end
 
-    it 'not valid without a valid currency' do
-      subject.name = 'My little account'
-      subject.currency = 'GBP'
-      subject.user = build(:user)
-      expect(subject).not_to be_valid
-    end
-
-    it 'not valid without a name' do
-      subject.name = 'My little account'
-      subject.currency = Value::Currency.new.code
-      subject.user = nil
-      expect(subject).not_to be_valid
+    context '#currency' do
+      it { should validate_presence_of(:currency) }
+      it { should allow_values(Value::Currency.codes).for(:currency) }
+      it { should_not allow_values('foo', '', nil).for(:currency) }
     end
   end
 end

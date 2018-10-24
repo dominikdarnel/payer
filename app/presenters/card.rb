@@ -2,14 +2,20 @@ require 'delegate'
 
 module Presenters
   class Card < SimpleDelegator
-    def currencies_for_select
-      Value::Currency.all.collect do |currency|
-        [currency.last[:text], currency.last[:code]]
-      end
+    def months_for_select
+      Constants::VALID_MONTHS
     end
 
-    def selected_currency
-      currency || Value::Currency.new.code
+    def selected_month
+      month || Constants::VALID_MONTHS.first
+    end
+
+    def years_for_select
+      Constants::VALID_YEARS
+    end
+
+    def selected_year
+      year || Constants::VALID_YEARS.first
     end
   end
 end
