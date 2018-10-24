@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
     @account_service = Services::AccountModifier.new(@account, account_params, current_user)
     @account = @account_service.account
     respond_to do |format|
-      if @account.save
+      if @account_service.save
         format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
         format.json { render :index, status: :ok, location: @account }
       else
