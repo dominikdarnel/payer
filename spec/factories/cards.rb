@@ -8,5 +8,9 @@ FactoryBot.define do
     ccv { 657 }
     amount { 3452 }
     user { create(:user) }
+
+    trait :invalid do
+      number { nil }
+    end
   end
 end
