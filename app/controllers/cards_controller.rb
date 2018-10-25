@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: :destroy
+  load_and_authorize_resource
 
   def index
     @cards = Card.all.map do |card|

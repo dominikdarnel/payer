@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:update, :destroy]
+  load_and_authorize_resource
 
   def index
     @accounts = Account.all.map do |account|
