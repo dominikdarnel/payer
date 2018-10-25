@@ -17,7 +17,6 @@ class CardsController < ApplicationController
 
   def create
     @card_service = Services::CardCreator.new(Card.new, card_params, current_user)
-    @card = @card_service.card
     respond_to do |format|
       if @card_service.save
         format.html { redirect_to cards_path, flash: { success: 'Card was successfully created' } }

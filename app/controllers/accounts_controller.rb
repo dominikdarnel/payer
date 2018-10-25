@@ -24,7 +24,6 @@ class AccountsController < ApplicationController
 
   def create
     @account_service = Services::AccountModifier.new(Account.new, create_params, current_user)
-    @account = @account_service.account
     respond_to do |format|
       if @account_service.save
         format.html { redirect_to accounts_path, flash: { success: 'Account was successfully created!' } }
@@ -38,7 +37,6 @@ class AccountsController < ApplicationController
 
   def update
     @account_service = Services::AccountModifier.new(@account, rename_params, current_user)
-    @account = @account_service.account
     respond_to do |format|
       if @account_service.save
         format.html { redirect_to accounts_path, flash: { success: 'Account was successfully updated!' } }
@@ -61,9 +59,8 @@ class AccountsController < ApplicationController
   def add_funds
     if request.post?
       @funds_service = Services::FundsCreator.new(@account, fund_params)
-      @account = @account_funds.account
       respond_to do |format|
-        if @account_service.save
+        if @funds_service.save
           format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
           format.json { render :index, status: :ok, location: @account }
         else

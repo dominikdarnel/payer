@@ -1,7 +1,5 @@
 module Services
   class FundsCreator
-    attr_reader :account
-
     def initialize(account, params)
       @account = account
       @card = Card.find(params[:card_id])
