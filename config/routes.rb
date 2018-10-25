@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'landing#index'
+  root 'landing#index'
   resources :transactions
-  resources :accounts, except: :show
   resources :cards, only: %i[index new create destroy]
   devise_for :users
+  resources :accounts, except: :show
+  get 'accounts/add_funds' => 'accounts#add_funds'
+  post 'accounts/add_funds' => 'accounts#add_funds'
 end

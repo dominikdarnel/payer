@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:update, :destroy]
+  before_action :set_account, only: %i[update destroy]
   load_and_authorize_resource
 
   def index
@@ -58,22 +58,22 @@ class AccountsController < ApplicationController
     end
   end
 
-  def funds
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def add_funds
-    @funds_service = Services::FundsCreator.new(@account, fund_params)
-    @account = @account_funds.account
-    respond_to do |format|
-      if @account_service.save
-        format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
-        format.json { render :index, status: :ok, location: @account }
-      else
-        format.html { edirect_to accounts_path, flash: { error: 'Funds could not be added to the account!' } }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+    if request.post?
+      @funds_service = Services::FundsCreator.new(@account, fund_params)
+      @account = @account_funds.account
+      respond_to do |format|
+        if @account_service.save
+          format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
+          format.json { render :index, status: :ok, location: @account }
+        else
+          format.html { edirect_to accounts_path, flash: { error: 'Funds could not be added to the account!' } }
+          format.json { render json: @account.errors, status: :unprocessable_entity }
+        end
+      end
+    elsif request.get?
+      respond_to do |format|
+        format.js
       end
     end
   end
@@ -93,6 +93,6 @@ class AccountsController < ApplicationController
   end
 
   def fund_params
-    params.require(:account).permit(:card_id, :amount)
+    params.require(:account_id, :card_id, :amount)
   end
 end

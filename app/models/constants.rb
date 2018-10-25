@@ -20,7 +20,7 @@ module Constants
   BOOTSTRAP_FLASH_MSG = {
     success: 'alert-success',
     error: 'alert-danger',
-    alert: 'alert-block',
+    alert: 'alert-warning',
     notice: 'alert-info'
   }.freeze
 end
