@@ -33,11 +33,7 @@
     </nav>
 
     <div class="container">
-      <% if notice %>
-        <p class="alert alert-info"><%= notice %></p>
-      <% elsif alert %>
-        <p class="alert alert-warning"><%= alert %></p>
-      <% end %>
+      <%= flash_messages %>
 
       <%= yield %>
     </div>

@@ -19,10 +19,10 @@ class CardsController < ApplicationController
     @card = @card_service.card
     respond_to do |format|
       if @card_service.save
-        format.html { redirect_to cards_path, notice: 'Card was successfully created.' }
+        format.html { redirect_to cards_path, flash: { success: 'Card was successfully created' } }
         format.json { render :index, status: :created, location: @card }
       else
-        format.html { render :new }
+        format.html { redirect_to cards_path, flash: { error: 'Card could not be created due to errors!' } }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
     end
@@ -31,7 +31,7 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     respond_to do |format|
-      format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
+      format.html { redirect_to cards_url, flash: { success: 'Card was successfully destroyed.' } }
       format.json { head :no_content }
     end
   end

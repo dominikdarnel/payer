@@ -26,10 +26,10 @@ class AccountsController < ApplicationController
     @account = @account_service.account
     respond_to do |format|
       if @account_service.save
-        format.html { redirect_to accounts_path, notice: 'Account was successfully created.' }
+        format.html { redirect_to accounts_path, flash: { success: 'Account was successfully created!' } }
         format.json { render :index, status: :created, location: @account }
       else
-        format.html { render :new }
+        format.html { redirect_to accounts_path, flash: { error: 'Account could not be created due to errors!' } }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
@@ -40,10 +40,10 @@ class AccountsController < ApplicationController
     @account = @account_service.account
     respond_to do |format|
       if @account_service.save
-        format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
+        format.html { redirect_to accounts_path, flash: { success: 'Account was successfully updated!' } }
         format.json { render :index, status: :ok, location: @account }
       else
-        format.html { render :index }
+        format.html { edirect_to accounts_path, flash: { error: 'Account could not be updated due to errors!' } }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +52,7 @@ class AccountsController < ApplicationController
   def destroy
     @account.destroy
     respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
+      format.html { redirect_to accounts_url, flash: { success: 'Account was successfully destroyed.' } }
       format.json { head :no_content }
     end
   end

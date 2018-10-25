@@ -16,4 +16,11 @@ module Constants
 
   VALID_MONTHS = (1..12).to_a.freeze
   VALID_YEARS = (18..27).to_a.freeze
+
+  BOOTSTRAP_FLASH_MSG = {
+    success: 'alert-success',
+    error: 'alert-danger',
+    alert: 'alert-block',
+    notice: 'alert-info'
+  }.freeze
 end
