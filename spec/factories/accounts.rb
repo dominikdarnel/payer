@@ -4,5 +4,9 @@ FactoryBot.define do
     name { 'My USD account' }
     amount { 1000 }
     user { create(:user) }
+
+    trait :invalid do
+      currency { nil }
+    end
   end
 end

@@ -24,6 +24,11 @@ RSpec.describe CardsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       let(:params) { { card: attributes_for(:card) } }
+
+      it 'creates a new card' do
+        expect { post :create, params: params }.to change(Card, :count).by(1)
+      end
+
       it 'redirects_to index' do
         post :create, params: params
         expect(response).to redirect_to(cards_path)
@@ -32,6 +37,7 @@ RSpec.describe CardsController, type: :controller do
     end
     context 'with invalid params' do
       let(:params) { { card: attributes_for(:card, :invalid) } }
+
       it 'redirects_to index' do
         post :create, params: params
         expect(response).to redirect_to(cards_path)
@@ -42,8 +48,10 @@ RSpec.describe CardsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:card) { create(:card, user: user) }
+
     it 'redirects_to index' do
       delete :destroy, params: card.attributes
+      expect { Card.find(card.id) }.to raise_error(ActiveRecord::RecordNotFound)
       expect(response).to redirect_to(cards_path)
       expect(response.status).to eq(302)
     end

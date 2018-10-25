@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :card do
     bank { Faker::Bank.name }
     currency { Value::Currency.new.code }
-    number { Faker::Bank.account_number(17) }
+    number { 1234123412341234 }
     month { 9 }
     year { 21 }
     ccv { 657 }
