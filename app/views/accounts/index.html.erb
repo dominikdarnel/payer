@@ -14,7 +14,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title"><%= account.name %></h5>
-            <h2 class="card-text">
+            <h2 class="card-text account-amount">
               <%= account.amount %>
               <%= account.displayed_currency %>
             </h2>
@@ -32,4 +32,6 @@
 <div id="account-modal"></div>
 
 <%= link_to 'New Account', new_account_path, remote: true, class: 'btn btn-primary btn-lg mr-3' %>
-<%= link_to 'Add Funds', accounts_add_funds_path, remote: true, class: 'btn btn-success btn-lg' %>
+<% if !@accounts.empty? %>
+  <%= link_to 'Add Funds', accounts_add_funds_path, remote: true, class: 'btn btn-success btn-lg' %>
+<% end %>
