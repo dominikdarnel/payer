@@ -38,11 +38,11 @@
         <% @cards.each do |card| %>
           <div class="col-6">
             <div class="card border-primary mb-3" style="max-width: 18rem;">
-              <div class="card-header">
+              <div class="card-header bank-name">
                 <%= card.bank %>
               </div>
               <div class="card-body">
-                <h5 class="card-title"><%= card.number_display %></h5>
+                <h5 class="card-title card-number"><%= card.number_display %></h5>
               </div>
             </div>
           </div>

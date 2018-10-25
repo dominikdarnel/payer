@@ -22,7 +22,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account_service = Services::AccountModifier.new(Account.new, account_params, current_user)
+    @account_service = Services::AccountModifier.new(Account.new, create_params, current_user)
     @account = @account_service.account
     respond_to do |format|
       if @account_service.save
@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
   end
 
   def update
-    @account_service = Services::AccountModifier.new(@account, account_params, current_user)
+    @account_service = Services::AccountModifier.new(@account, rename_params, current_user)
     @account = @account_service.account
     respond_to do |format|
       if @account_service.save
@@ -57,13 +57,41 @@ class AccountsController < ApplicationController
     end
   end
 
+  def funds
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_funds
+    @funds_service = Services::FundsCreator.new(@account, fund_params)
+    @account = @account_funds.account
+    respond_to do |format|
+      if @account_service.save
+        format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
+        format.json { render :index, status: :ok, location: @account }
+      else
+        format.html { edirect_to accounts_path, flash: { error: 'Funds could not be added to the account!' } }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_account
     @account = Account.find(params[:id])
   end
 
-  def account_params
-    params.require(:account).permit(:name, :currency, :amount, :user_id)
+  def create_params
+    params.require(:account).permit(:name, :currency)
+  end
+
+  def rename_params
+    params.require(:account).permit(:name)
+  end
+
+  def fund_params
+    params.require(:account).permit(:card_id, :amount)
   end
 end

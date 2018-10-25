@@ -7,13 +7,13 @@
   <br>
   <div class="row">
     <% @cards.each do |card| %>
-      <div class="col-4">
+      <div class="col-3">
         <div class="card border-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">
+          <div class="card-header bank-name">
             <%= card.bank %>
           </div>
           <div class="card-body">
-            <h5 class="card-title"><%= card.number_display %></h5>
+            <h5 class="card-title card-number"><%= card.number_display %></h5>
             <%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
           </div>
         </div>

@@ -1,3 +1,13 @@
+body {
+  margin-top: 5em;
+}
+
+.account-form {
+  .btn {
+    margin: 1em;
+  }
+}
+
 .login {
   margin: 3em;
   padding: 2em;
@@ -7,6 +17,10 @@
   font-size: 1.5em;
 }
 
-body {
-  margin-top: 5em;
+.bank-name {
+  font-weight: bold;
+}
+
+.card-number {
+  font-size: 1em;
 }
