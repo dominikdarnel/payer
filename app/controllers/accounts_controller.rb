@@ -69,6 +69,7 @@ class AccountsController < ApplicationController
         end
       end
     elsif request.get?
+      @funds_presenter = Presenter::Funds.new(current_user)
       respond_to do |format|
         format.js
       end
