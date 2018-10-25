@@ -48,6 +48,8 @@ describe Card, type: :model do
 
     context '#amount' do
       it { should validate_presence_of(:amount) }
+      it { should allow_values(1, 100, 1000).for(:amount) }
+      it { should_not allow_values(-1).for(:amount) }
     end
 
     context '#bank' do
