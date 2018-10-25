@@ -39,7 +39,7 @@ module Services
     end
 
     def account_and_card_is_valid?
-      @account.valid? && @card.valid?
+      @account.errors.empty? && @account.valid? && @card.valid?
     end
 
     def invalid_funding_msg
