@@ -3,7 +3,7 @@ module Services
     def initialize(params)
       @account = Account.find(params[:account_id])
       @card = Card.find(params[:card_id])
-      @amount = params[:amount]
+      @amount = params[:amount].to_i
       @funding_policy = Policies::Funding.new(@account, @card, @amount)
     end
 
