@@ -49,7 +49,7 @@ module Services
       when Constants::CURRENCIES[:eur][:code]
         Random.rand(100..1000)
       when Constants::CURRENCIES[:huf][:code]
-        Random.rand(10_000..100_000)
+        Random.rand(50_000..100_000)
       end
     end
 

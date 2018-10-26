@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
         format.html { redirect_to accounts_path, flash: { success: 'Account was successfully updated!' } }
         format.json { render :index, status: :ok, location: @account }
       else
-        format.html { edirect_to accounts_path, flash: { error: 'Account could not be updated due to errors!' } }
+        format.html { redirect_to accounts_path, flash: { error: 'Account could not be updated due to errors!' } }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +64,7 @@ class AccountsController < ApplicationController
           format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
           format.json { render :index, status: :ok, location: @account }
         else
-          format.html { edirect_to accounts_path, flash: { error: 'Funds could not be added to the account!' } }
+          format.html { redirect_to accounts_path, flash: { error: 'Funds could not be added to the account!' } }
           format.json { render json: @account.errors, status: :unprocessable_entity }
         end
       end

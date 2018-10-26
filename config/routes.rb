@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'landing#index'
-  resources :transactions
+  resources :transactions, only: %i[index new create]
   resources :cards, only: %i[index new create destroy]
   devise_for :users
   resources :accounts, except: :show
