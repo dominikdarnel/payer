@@ -6,14 +6,17 @@ $('.select-account-for-funding').on('change', function() {
   fetchCardsForAccount(selectedAccount)
 })
 
-$('.select-account-for-funding, .select-card-for-funding, .amount-for-funding').on('change', function() {
+$('.select-card-for-funding').on('change', function() {
+  diasbleAddFundsButton()
+})
+
+$('.amount-for-funding').on('input', function() {
   diasbleAddFundsButton()
 })
 
 $('#add-funds-modal').on('shown.bs.modal', function() {
   var selectedAccount = $('.select-account-for-funding').val();
   fetchCardsForAccount(selectedAccount)
-  diasbleAddFundsButton()
 })
 
 function diasbleAddFundsButton () {
@@ -22,8 +25,10 @@ function diasbleAddFundsButton () {
   var anyFieldIsEmpty = !amountField.val() || !cardField.val()
 
   if (anyFieldIsEmpty) {
+    console.log('ures')
     $('.btn-add-funds').attr('disabled', 'disabled');
   } else {
+    console.log('nemures')
     $('.btn-add-funds').removeAttr('disabled');
   }
 }
@@ -37,5 +42,6 @@ function fetchCardsForAccount (selectedAccount) {
           $('.select-card-for-funding').append(new Option(element['text'], element['id']));
         });
       }
+    diasbleAddFundsButton()
     });
 }

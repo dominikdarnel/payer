@@ -13,7 +13,7 @@
           <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
           <%= form.select :account, options_for_select(@funds_presenter.my_accounts_for_select), {}, class: 'select-account-for-funding' %>
           <%= form.select :card, [], {}, class: 'select-card-for-funding' %>
-          <%= form.number_field :amount, card: 'amount-for-funding' %>
+          <%= form.number_field :amount, class: 'amount-for-funding' %>
 
         </div>
         <div class="modal-footer">
