@@ -9,17 +9,6 @@
           </button>
         </div>
         <div class="modal-body">
-          <% if @card.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@card.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-              <ul>
-              <% @card.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
 
           <%= form.number_field :number %>
           <%= form.select :month, options_for_select(@card.months_for_select, @card.selected_month) %>
