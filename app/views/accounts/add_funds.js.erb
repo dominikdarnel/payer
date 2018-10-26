@@ -1,13 +1,41 @@
 $("#account-modal").html("<%= j render "add_funds"%>");
 $('#add-funds-modal').modal('show');
 
-$('.select-account-for-funding').on('load change', function() {
+$('.select-account-for-funding').on('change', function() {
   var selectedAccount = $(this).val();
+  fetchCardsForAccount(selectedAccount)
+})
+
+$('.select-account-for-funding, .select-card-for-funding, .amount-for-funding').on('change', function() {
+  diasbleAddFundsButton()
+})
+
+$('#add-funds-modal').on('shown.bs.modal', function() {
+  var selectedAccount = $('.select-account-for-funding').val();
+  fetchCardsForAccount(selectedAccount)
+  diasbleAddFundsButton()
+})
+
+function diasbleAddFundsButton () {
+  var amountField = $('.amount-for-funding');
+  var cardField = $('.select-card-for-funding');
+  var anyFieldIsEmpty = !amountField.val() || !cardField.val()
+
+  if (anyFieldIsEmpty) {
+    $('.btn-add-funds').attr('disabled', 'disabled');
+  } else {
+    $('.btn-add-funds').removeAttr('disabled');
+  }
+}
+
+function fetchCardsForAccount (selectedAccount) {
   $.post( 'accounts/cards_for_account', { account_id: selectedAccount } )
     .done(function( data ) {
-      data['result'].forEach(function(element) {
-        console.log(element);
-        $('.select-card-for-funding').append(new Option(element['text'], element['id']));
-      });
+      $('.select-card-for-funding').empty();
+      if (data['result']) {
+        data['result'].forEach(function(element) {
+          $('.select-card-for-funding').append(new Option(element['text'], element['id']));
+        });
+      }
     });
-  })
+}
