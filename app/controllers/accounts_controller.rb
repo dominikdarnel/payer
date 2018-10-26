@@ -58,7 +58,7 @@ class AccountsController < ApplicationController
 
   def add_funds
     if request.post?
-      @funds_service = Services::FundsCreator.new(@account, fund_params)
+      @funds_service = Services::FundsCreator.new(fund_params)
       respond_to do |format|
         if @funds_service.save
           format.html { redirect_to accounts_path, flash: { success: 'Funds were successfully added to the account!' } }
@@ -69,7 +69,7 @@ class AccountsController < ApplicationController
         end
       end
     elsif request.get?
-      @funds_presenter = Presenter::Funds.new(current_user)
+      @funds_presenter = Presenters::Funds.new(current_user)
       respond_to do |format|
         format.js
       end
@@ -91,6 +91,6 @@ class AccountsController < ApplicationController
   end
 
   def fund_params
-    params.require(:account_id, :card_id, :amount)
+    params.permit(:account_id, :card_id, :amount)
   end
 end

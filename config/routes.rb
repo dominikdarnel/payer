@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :accounts, except: :show
   get 'accounts/add_funds' => 'accounts#add_funds'
   post 'accounts/add_funds' => 'accounts#add_funds'
+  post 'accounts/cards_for_account' => 'ajax#cards_for_account'
 end

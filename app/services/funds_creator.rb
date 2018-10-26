@@ -1,7 +1,7 @@
 module Services
   class FundsCreator
-    def initialize(account, params)
-      @account = account
+    def initialize(params)
+      @account = Account.find(params[:account_id])
       @card = Card.find(params[:card_id])
       @amount = params[:amount]
       @funding_policy = Policies::Funding.new(@account, @card, @amount)

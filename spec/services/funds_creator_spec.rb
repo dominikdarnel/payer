@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Services::FundsCreator do
   subject do
     described_class.new(
-      account,
       params
     )
   end
@@ -16,6 +15,7 @@ describe Services::FundsCreator do
       let(:amount) { 50 }
       let(:params) do
         {
+          account_id: account.id,
           card_id: card.id,
           amount: amount
         }
@@ -37,6 +37,7 @@ describe Services::FundsCreator do
         let(:amount) { 50 }
         let(:params) do
           {
+            account_id: account.id,
             card_id: card.id,
             amount: amount
           }
@@ -58,6 +59,7 @@ describe Services::FundsCreator do
         let(:amount) { 50 }
         let(:params) do
           {
+            account_id: account.id,
             card_id: card.id,
             amount: amount
           }
@@ -81,6 +83,7 @@ describe Services::FundsCreator do
         let(:amount) { 50 }
         let(:params) do
           {
+            account_id: account.id,
             card_id: card.id,
             amount: amount
           }
@@ -104,6 +107,7 @@ describe Services::FundsCreator do
           let(:amount) { 50 }
           let(:params) do
             {
+              account_id: account.id,
               card_id: card.id,
               amount: amount
             }

@@ -1,2 +1,13 @@
 $("#account-modal").html("<%= j render "add_funds"%>");
 $('#add-funds-modal').modal('show');
+
+$('.select-account-for-funding').on('load change', function() {
+  var selectedAccount = $(this).val();
+  $.post( 'accounts/cards_for_account', { account_id: selectedAccount } )
+    .done(function( data ) {
+      data['result'].forEach(function(element) {
+        console.log(element);
+        $('.select-card-for-funding').append(new Option(element['text'], element['id']));
+      });
+    });
+  })
