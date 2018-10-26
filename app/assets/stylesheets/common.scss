@@ -28,3 +28,18 @@ body {
 .account-amount {
   font-size: 2.5em;
 }
+
+.landing {
+  .account-amount {
+    font-size: 1.5em;
+  }
+
+  .bank-name {
+    font-size: .5em;
+    font-weight: bold;
+  }
+
+  .card-number {
+    font-size: .85em;
+  }
+}
