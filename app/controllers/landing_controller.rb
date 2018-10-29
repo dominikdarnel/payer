@@ -1,9 +1,9 @@
 class LandingController < ApplicationController
   def index
-    @accounts = Account.all.map do |account|
+    @accounts = Account.accessible_by(current_ability).map do |account|
       Presenters::Account.new(account)
     end
-    @cards = Card.all.map do |card|
+    @cards = Card.accessible_by(current_ability).map do |card|
       Presenters::Card.new(card)
     end
   end

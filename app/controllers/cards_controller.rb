@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @cards = Card.all.map do |card|
+    @cards = @cards.map do |card|
       Presenters::Card.new(card)
     end
   end
