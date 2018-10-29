@@ -12,7 +12,10 @@ module Services
       modify_account!
       if account_is_valid?
         @account.save
+        Rails.logger.info '[AccountCreator] Account is successfully saved.'
+        true
       else
+        Rails.logger.error "[AccountCreator] Account could not be saved: #{@account.errors.full_messages}."
         false
       end
     end

@@ -12,7 +12,10 @@ module Services
       if account_and_card_is_valid?
         @card.save
         @account.save
+        Rails.logger.info '[FundsCreator] Funding is successfull.'
+        true
       else
+        Rails.logger.error "[FundsCreator] Funding was not successful: #{@account.errors.full_messages} #{@card.errors.full_messages}."
         false
       end
     end
@@ -23,9 +26,10 @@ module Services
       if funding_is_valid?
         @card.decrement(:amount, @amount)
         @account.increment(:amount, @amount)
+        Rails.logger.info '[FundsCreator] Funds have been successfully taken from Card.'
       else
         @account.errors.add(:funding, invalid_funding_msg)
-        false
+        Rails.logger.error "[FundsCreator] Funds could not be taken from Card due to errors: #{@account.errors.full_messages}."
       end
     end
 

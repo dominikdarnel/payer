@@ -14,7 +14,10 @@ module Services
       create_card!
       if card_is_valid?
         @card.save
+        Rails.logger.info '[CardCreator] Card is successfully created.'
+        true
       else
+        Rails.logger.error "[CardCreator] Card could not be created: #{@card.errors.full_messages}."
         false
       end
     end
