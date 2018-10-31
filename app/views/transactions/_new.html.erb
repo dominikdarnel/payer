@@ -10,6 +10,9 @@
         </div>
         <div class="modal-body">
 
+          <%= form.collection_select :from_account_id, @transaction.my_accounts, :id, :name %>
+          <%= form.collection_select :to_user_id, @transaction.other_users, :id, :email %>
+          <%= form.select :to_account_id, [], {} %>
           <%= form.number_field :amount %>
 
         </div>

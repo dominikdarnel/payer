@@ -6,18 +6,21 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @transaction = Transaction.new
+    @transaction = Presenters::Transaction.new(new_transaction)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction_service = Services::TransactionCreator.new(transaction_params, current_user)
 
     respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+      if @transaction_service.save
+        format.html { redirect_to transations_path, flash: { success: 'Transaction was successfully created.' } }
+        format.json { render :index, status: :created, location: @transaction }
       else
-        format.html { render :new }
+        format.html { redirect_to transations_path, flash: { error: 'Transaction could not be made due to errors!' } }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
@@ -25,7 +28,16 @@ class TransactionsController < ApplicationController
 
   private
 
+  def new_transaction
+    Transaction.new(from_user: current_user)
+  end
+
   def transaction_params
-    params.require(:transaction).permit(:amount, :initiated_by_id, :from_account_id, :to_account_id)
+    params.require(:transaction).permit(
+      :amount,
+      :to_user_id,
+      :from_account_id,
+      :to_account_id
+    )
   end
 end

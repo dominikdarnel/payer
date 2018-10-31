@@ -41,14 +41,16 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "amount"
-    t.bigint "initiated_by_id"
+    t.bigint "from_user_id"
+    t.bigint "to_user_id"
     t.bigint "from_account_id"
     t.bigint "to_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_account_id"], name: "index_transactions_on_from_account_id"
-    t.index ["initiated_by_id"], name: "index_transactions_on_initiated_by_id"
+    t.index ["from_user_id"], name: "index_transactions_on_from_user_id"
     t.index ["to_account_id"], name: "index_transactions_on_to_account_id"
+    t.index ["to_user_id"], name: "index_transactions_on_to_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,5 +75,6 @@ ActiveRecord::Schema.define(version: 2018_10_22_090517) do
   add_foreign_key "cards", "users"
   add_foreign_key "transactions", "accounts", column: "from_account_id"
   add_foreign_key "transactions", "accounts", column: "to_account_id"
-  add_foreign_key "transactions", "users", column: "initiated_by_id"
+  add_foreign_key "transactions", "users", column: "from_user_id"
+  add_foreign_key "transactions", "users", column: "to_user_id"
 end

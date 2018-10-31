@@ -99,28 +99,26 @@ describe Services::FundsCreator do
       end
 
       context 'card and owner has differen owners' do
-        context 'card and account are using different currencies' do
-          let(:user) { create(:user) }
-          let(:other_user) { create(:user) }
-          let(:account) { create(:account, user: user, amount: 0) }
-          let(:card) { create(:card, user: other_user, amount: 100) }
-          let(:amount) { 50 }
-          let(:params) do
-            {
-              account_id: account.id,
-              card_id: card.id,
-              amount: amount
-            }
-          end
-
-          before(:each) do
-            subject.save
-          end
-
-          it { expect(subject.save).to be false }
-          it { expect(Account.first.amount).to eq(0) }
-          it { expect(Card.first.amount).to eq(100) }
+        let(:user) { create(:user) }
+        let(:other_user) { create(:user) }
+        let(:account) { create(:account, user: user, amount: 0) }
+        let(:card) { create(:card, user: other_user, amount: 100) }
+        let(:amount) { 50 }
+        let(:params) do
+          {
+            account_id: account.id,
+            card_id: card.id,
+            amount: amount
+          }
         end
+
+        before(:each) do
+          subject.save
+        end
+
+        it { expect(subject.save).to be false }
+        it { expect(Account.first.amount).to eq(0) }
+        it { expect(Card.first.amount).to eq(100) }
       end
     end
   end

@@ -31,14 +31,14 @@ describe Policies::Funding do
 
     context 'card and account has the same currency' do
       let(:card) { create(:card, currency: currency) }
-      let(:account) { create(:card, currency: currency) }
+      let(:account) { create(:account, currency: currency) }
 
       it { expect(subject.card_has_same_currency_as_account?).to be true }
     end
 
     context 'card and account does not have the same currency' do
       let(:card) { create(:card, currency: currency) }
-      let(:account) { create(:card, currency: other_currency) }
+      let(:account) { create(:account, currency: other_currency) }
 
       it { expect(subject.card_has_same_currency_as_account?).to be false }
     end
