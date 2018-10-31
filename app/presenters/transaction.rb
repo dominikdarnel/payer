@@ -11,7 +11,7 @@ module Presenters
     end
 
     def accounts_for_transaction(user, account_param)
-      Account.all.select do |account|
+      ::Account.all.select do |account|
         account.user == user &&
           account.currency == account_param.currency
       end
