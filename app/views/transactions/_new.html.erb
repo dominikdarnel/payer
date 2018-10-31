@@ -13,11 +13,11 @@
           <%= form.collection_select :from_account_id, @transaction.my_accounts, :id, :name, {}, class: 'select-from-account' %>
           <%= form.collection_select :to_user_id, @transaction.other_users, :id, :email, {}, class: 'select-to-user' %>
           <%= form.select :to_account_id, [], {}, class: 'select-to-account' %>
-          <%= form.number_field :amount, class: 'input-amount' %>
+          <%= form.number_field :amount, class: 'field-amount' %>
 
         </div>
         <div class="modal-footer">
-          <%= form.submit 'Send Money', class: 'btn btn-primary' %>
+          <%= form.submit 'Send Money', class: 'btn btn-primary btn-send-money' %>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>

@@ -1,2 +1,49 @@
 $("#transaction-modal").html("<%= j render "new"%>");
 $('#new-transaction-modal').modal('show');
+
+$('.select-from-account, .select-to-user').on('change', function() {
+  var selectedUser = $('.select-to-user').val();
+  var selectedAccount = $('.select-from-account').val();
+
+  fetchAccountsForSelect(selectedUser, selectedAccount)
+})
+
+$('.select-to-account').on('change', function() {
+  diasbleSendMoneyButton()
+})
+
+$('.field-amount').on('input', function() {
+  diasbleSendMoneyButton()
+})
+
+$('#new-transaction-modal').on('shown.bs.modal', function() {
+  var selectedAccount = $('.select-from-account').val();
+  var selectedUser = $('.select-to-user').val();
+
+  fetchAccountsForSelect(selectedUser, selectedAccount)
+})
+
+function diasbleSendMoneyButton () {
+  var amountField = $('.field-amount');
+  var toAccountField = $('.select-to-account');
+  var anyFieldIsEmpty = !amountField.val() || !toAccountField.val()
+
+  if (anyFieldIsEmpty) {
+    $('.btn-send-money').attr('disabled', 'disabled');
+  } else {
+    $('.btn-send-money').removeAttr('disabled');
+  }
+}
+
+function fetchAccountsForSelect (selectedUser, selectedAccount) {
+  $.post( 'transactions/accounts_for_transaction', { user_id: selectedUser, account_id: selectedAccount } )
+    .done(function( data ) {
+      $('.select-to-account').empty();
+      if (data['result']) {
+        data['result'].forEach(function(element) {
+          $('.select-to-account').append(new Option(element['text'], element['id']));
+        });
+      }
+    diasbleSendMoneyButton()
+    });
+}

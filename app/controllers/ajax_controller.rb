@@ -7,9 +7,10 @@ class AjaxController < ApplicationController
 
   def accounts_for_transaction
     account = Account.find(params[:account_id])
+    user = User.find(params[:user_id])
     new_transaction = Transaction.new(from_user: current_user)
     accounts_for_transaction = Presenters::Transaction.new(new_transaction)
-                                               .accounts_for_transaction_json(current_user, account)
+                                               .accounts_for_transaction_json(user, account)
     render json: { result: accounts_for_transaction }
   end
 end
