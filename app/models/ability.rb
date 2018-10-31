@@ -6,6 +6,7 @@ class Ability
 
     can :manage, Account, user_id: user.id
     can :manage, Transaction, from_user_id: user.id
+    can :manage, Transaction, to_user_id: user.id
     can :manage, Card, user_id: user.id
   end
 end

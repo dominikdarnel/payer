@@ -25,5 +25,25 @@ module Presenters
         }
       end
     end
+
+    def transaction_type(current_user)
+      case current_user
+      when from_user
+        'Charge'
+      when to_user
+        'Credit'
+      end
+    end
+
+    def displayed_amount
+      case from_account.currency
+      when Constants::CURRENCIES[:usd][:code]
+        "#{amount} $"
+      when Constants::CURRENCIES[:eur][:code]
+        "#{amount} €"
+      when Constants::CURRENCIES[:huf][:code]
+        "#{amount} HUF"
+      end
+    end
   end
 end

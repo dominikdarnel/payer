@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Presenters::Transaction do
   subject { described_class.new(transaction) }
-  let(:transaction) { create(:transaction, from_user: user) }
+  let(:transaction) { create(:transaction, from_user: user, to_user: other_user) }
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
@@ -38,5 +38,38 @@ describe Presenters::Transaction do
     end
 
     it { expect(subject.accounts_for_transaction_json(user, account_one)).to match_array([result]) }
+  end
+
+  describe '#transaction_type' do
+    context 'charge' do
+      it { expect(subject.transaction_type(user)).to eq 'Charge' }
+    end
+
+    context 'charge' do
+      it { expect(subject.transaction_type(other_user)).to eq 'Credit' }
+    end
+  end
+
+  describe '#displayed_amount' do
+    let(:usd_account) { create(:account, currency: Constants::CURRENCIES[:usd][:code]) }
+    let(:euro_account) { create(:account, currency: Constants::CURRENCIES[:eur][:code]) }
+    let(:huf_account) { create(:account, currency: Constants::CURRENCIES[:huf][:code]) }
+
+    context 'USD' do
+      let(:transaction) { create(:transaction, from_account: usd_account) }
+
+      it { expect(subject.displayed_amount).to eq "#{transaction.amount} $" }
+    end
+
+    context 'Euro' do
+      let(:transaction) { create(:transaction, from_account: euro_account) }
+
+      it { expect(subject.displayed_amount).to eq "#{transaction.amount} €" }
+    end
+
+    context 'HUF' do
+      let(:transaction) { create(:transaction, from_account: huf_account) }
+      it { expect(subject.displayed_amount).to eq "#{transaction.amount} HUF" }
+    end
   end
 end

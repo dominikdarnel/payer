@@ -2,7 +2,9 @@ class TransactionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.all.map do |transaction|
+      Presenters::Transaction.new(transaction)
+    end
   end
 
   def new
