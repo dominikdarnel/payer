@@ -10,10 +10,10 @@
         </div>
         <div class="modal-body">
 
-          <%= form.collection_select :from_account_id, @transaction.my_accounts, :id, :name %>
-          <%= form.collection_select :to_user_id, @transaction.other_users, :id, :email %>
-          <%= form.select :to_account_id, [], {} %>
-          <%= form.number_field :amount %>
+          <%= form.collection_select :from_account_id, @transaction.my_accounts, :id, :name, {}, class: 'select-from-account' %>
+          <%= form.collection_select :to_user_id, @transaction.other_users, :id, :email, {}, class: 'select-to-user' %>
+          <%= form.select :to_account_id, [], {}, class: 'select-to-account' %>
+          <%= form.number_field :amount, class: 'input-amount' %>
 
         </div>
         <div class="modal-footer">

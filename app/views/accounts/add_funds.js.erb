@@ -25,10 +25,8 @@ function diasbleAddFundsButton () {
   var anyFieldIsEmpty = !amountField.val() || !cardField.val()
 
   if (anyFieldIsEmpty) {
-    console.log('ures')
     $('.btn-add-funds').attr('disabled', 'disabled');
   } else {
-    console.log('nemures')
     $('.btn-add-funds').removeAttr('disabled');
   }
 }
