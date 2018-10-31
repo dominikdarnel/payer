@@ -3,7 +3,7 @@ module Services
     def initialize(params, current_user)
       @current_user = current_user
       @transaction = Transaction.new
-      @amount = params[:amount]
+      @amount = params[:amount].to_i
       @from_account = Account.find(params[:from_account_id])
       @to_account = Account.find(params[:to_account_id])
       @to_user = User.find(params[:to_user_id])

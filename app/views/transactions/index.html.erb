@@ -7,10 +7,12 @@
   <table class="table">
     <thead>
       <tr>
+        <th>From User</th>
+        <th>From Account</th>
+        <th>To User</th>
+        <th>To Account</th>
         <th>Amount</th>
-        <th>Initiated by</th>
-        <th>From account</th>
-        <th>To account</th>
+
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -18,10 +20,12 @@
     <tbody>
       <% @transactions.each do |transaction| %>
         <tr>
+          <td><%= transaction.from_user.email %></td>
+          <td><%= transaction.from_account.name %></td>
+          <td><%= transaction.to_user.email %></td>
+          <td><%= transaction.to_account.name %></td>
           <td><%= transaction.amount %></td>
-          <td><%= transaction.initiated_by %></td>
-          <td><%= transaction.from_account %></td>
-          <td><%= transaction.to_account %></td>
+
         </tr>
       <% end %>
     </tbody>
