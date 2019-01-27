@@ -16,7 +16,7 @@
 require 'simplecov'
 require 'factory_bot'
 
-SimpleCov.start
+SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
